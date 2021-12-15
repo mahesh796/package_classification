@@ -14,7 +14,7 @@ def predict_note_authentication(x):
     test_image = tf.expand_dims(test_image, axis=0)
     prediction = model.predict(test_image)
     prediction = np.argmax(prediction)
-    classes=['Hessian_bags','carboard_boxes','glass_boxes','Wooden_boxes']
+    classes=['carboard_boxes','Hessian_bags','Wooden_boxes']
     return classes[prediction]
 
 
