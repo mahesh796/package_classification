@@ -9,7 +9,7 @@ from fastbook import *
 path='Dataset'
 dls= ImageDataLoaders.from_folder(path,train = "train",
                                    valid_pct=0.15,
-                                   item_tfms=Resize(128),
+                                   item_tfms=Resize(256),
                                    batch_tfms=None, bs = 8)
 learn = cnn_learner(dls, models.resnet34)
 learn.load('model')
