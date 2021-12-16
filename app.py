@@ -1,21 +1,25 @@
-import numpy as np
+# import numpy as np
 import streamlit as st
-import tensorflow as tf
+# import tensorflow as tf
 from PIL import Image
-from tensorflow.keras.preprocessing import image
-import numpy as np
+# from tensorflow.keras.preprocessing import image
+# import numpy as np
+import fastbook
+from fastbook import *
+path='Dataset'
+dls= ImageDataLoaders.from_folder(path,train = "train",
+                                   valid_pct=0.15,
+                                   item_tfms=Resize(128),
+                                   batch_tfms=None, bs = 8)
+learn = cnn_learner(dls, models.resnet34)
+learn.load('model')
 
-model = tf.keras.models.load_model('weights-07-0.9828.h5',compile=False)
-
+#new
 def predict_note_authentication(x):
-    img = x.resize((256, 256), Image.ANTIALIAS)
-    test_image = image.img_to_array(img)
-    test_image = test_image / 255
-    test_image = tf.expand_dims(test_image, axis=0)
-    prediction = model.predict(test_image)
-    prediction = np.argmax(prediction)
-    classes=['carboard_boxes','Hessian_bags','Wooden_boxes']
-    return classes[prediction]
+    timg = TensorImage(image2tensor(x))
+    tpil = PILImage.create(timg)
+    result=learn.predict(tpil)
+    return str(result[0])
 
 
 def main():

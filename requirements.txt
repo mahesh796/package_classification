@@ -1,10 +1,6 @@
 certifi==2021.10.8
 flatbuffers==1.12
 grpcio==1.32.0
-numpy==1.18.5
-tensorboard==2.5.0
-tensorflow==2.3.1
-tensorflow-estimator==2.3.0
-typing-extensions==3.7.4.3
 wincertstore==0.2
 streamlit==1.1.0
+fastbook==0.0.18
